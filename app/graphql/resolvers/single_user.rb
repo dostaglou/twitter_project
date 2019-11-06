@@ -1,10 +1,8 @@
 module Resolvers
     class SingleUser < Resolvers::Base
-        argument :id, ID, required: true
-
+        argument :user_id, ID, required: true
         type Types::UserType, null: false
-
-        def resolve(id:)
+        def resolve(user_id:)
             User.find(id)
         end
     end

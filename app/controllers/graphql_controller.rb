@@ -26,9 +26,7 @@ class GraphqlController < ApplicationController
   rescue ActiveSupport::MessageVerifier::InvalidSignature
     nil
   end
-
-
-
+  
   # Handle form data, JSON body, or a blank value
   def ensure_hash(ambiguous_param)
     case ambiguous_param
