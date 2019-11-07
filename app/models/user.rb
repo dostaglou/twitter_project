@@ -31,8 +31,10 @@ class User < ApplicationRecord
       active_follow.find_by(following_id: user_id)&.destroy
     end
 
-    # def send_mail()
-
-    # end
+    def send_mail(username:, content:)
+      puts "I am now staging an email"
+      puts "It will go to me, #{self.username}}"
+      puts "It will include the tweeter #{username} and the tweets content#{content}"
+    end
 
 end
