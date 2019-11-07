@@ -8,6 +8,7 @@ module Types
     field :my_tweets, resolver: Resolvers::MyTweets
     field :current_user, resolver: Resolvers::CurrentUser
     field :current_feed, resolver: Resolvers::CurrentFeed
+    field :search_following, resolver: Resolvers::SearchFollowing
   
   end
 end
