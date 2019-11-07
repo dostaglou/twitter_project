@@ -1,14 +1,14 @@
 class User < ApplicationRecord
     has_secure_password
     has_many :tweets, dependent: :destroy
-    validates :username, presence: true
+    validates :username, presence: true, uniqueness: true
     validates :email, presence: true, uniqueness: true
 
     has_many :passive_follow, foreign_key: :following_id, class_name: 'Follow'
     has_many :followers, through: :passive_follow
   
     has_many :active_follow, foreign_key: :follower_id, class_name: 'Follow'
-    has_many :following, through: :active_follow, source: :tweets
+    has_many :following, through: :active_follow
   
     after_create :first_tweet
 
@@ -30,5 +30,9 @@ class User < ApplicationRecord
     def unfollow(user_id)
       active_follow.find_by(following_id: user_id)&.destroy
     end
+
+    # def send_mail()
+
+    # end
 
 end
