@@ -7,6 +7,7 @@ module Types
     field :user_tweets, resolver: Resolvers::UserTweets 
     field :my_tweets, resolver: Resolvers::MyTweets
     field :current_user, resolver: Resolvers::CurrentUser
+    field :current_feed, resolver: Resolvers::CurrentFeed
   
   end
 end

@@ -10,6 +10,17 @@ class User < ApplicationRecord
     has_many :active_follow, foreign_key: :follower_id, class_name: 'Follow'
     has_many :following, through: :active_follow
   
+    after_create :first_tweet
+
+    def first_tweet
+      Tweet.create( content: "I just joined Dwitter!", user_id: self.id )
+      first_follow
+    end
+
+    def first_follow
+      self.follow(self.id)
+    end
+
     def follow(user_id)
       active_follow.create(following_id: user_id)
     end

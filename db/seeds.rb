@@ -1,4 +1,4 @@
-users = ["a", "b", "Dillon", "Pat", "Orchid"]
+users = ["a", "b", "Dillon", "Pat", "orchid", "yoshi", "jordan", "sato", "francois", "ten"]
 
 users.each do |user|
     u = User.new(
@@ -19,3 +19,13 @@ users.each do |user|
     puts "#{u.username} now has 5 tweets"
   end
 
+def follow_time
+  puts "now we follow each other"
+  active = User.first(5)
+  passive = User.last(5)
+  passive.each do |pas|
+    active.each { |el| el.follow(pas.id)}
+  end
+end
+
+follow_time

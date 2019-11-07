@@ -4,6 +4,7 @@ module Mutations
         type Types::UserType
 
         def resolve (user_id:)
+            return unless context[:current_user] != user_id
             context[:current_user].unfollow(id)
             context[:current_user]
         rescue ActiveRecord::RecordInvalid => e
