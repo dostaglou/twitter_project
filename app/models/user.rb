@@ -12,8 +12,6 @@ class User < ApplicationRecord
   
     after_create :first_tweet
 
-    # has_many :feed_tweets, through: :active_follow, source: :following_id
-
     def first_tweet
       Tweet.create( content: "I just joined Dwitter!", user_id: self.id )
       first_follow
