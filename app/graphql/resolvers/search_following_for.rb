@@ -2,7 +2,7 @@ module Resolvers
     class SearchFollowingFor < Resolvers::Base
         
         argument :limit, Integer, required: false
-        argument :self_only, Boolean, required: false, default_value: false
+        argument :self_only, , required: false, default_value: false
         argument :others_only, Boolean, required: false, default_value: false
         argument :keyword, String, required: true
         type [Types::TweetType], null: false
@@ -10,7 +10,6 @@ module Resolvers
         def resolve(limit: 10, self_only:, others_only:, keyword:)
             return GraphQL::ExecutionError.new("Must be signed in to access this feature") unless context[:current_user]
             cu = context[:current_user]
-            
             return GraphQL::ExecutionError.new("You must provide a keyword! No empty string searches") if keyword == ""
             return GraphQL::ExecutionError.new("Limit must be greater than zero (0)") if limit < 1
             return GraphQL::ExecutionError.new("You may not set both SELF and OTHERs true at the same time") if self_only == true && others_only == true
