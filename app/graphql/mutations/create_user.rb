@@ -3,7 +3,7 @@ module Mutations
         argument :args, Types::UserArgs, required: true
         type Types::UserType
         def resolve(args: )
-            User.create( 
+            User.create!( 
                 username: args[:username],
                 email: args[:email],
                 password: args[:password],

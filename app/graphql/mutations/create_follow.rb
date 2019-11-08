@@ -5,6 +5,8 @@ module Mutations
         def resolve(target_id:)
             context[:current_user].follow(target_id)
             context[:current_user]
+        rescue ActiveRecord::RecordNotFound => e
+            GraphQL::ExecutionError.new("target user does not exist")
         end
     end
 end

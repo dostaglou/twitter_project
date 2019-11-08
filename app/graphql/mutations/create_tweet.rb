@@ -3,7 +3,7 @@ module Mutations
         argument :content, String, required: true
         type Types::TweetType
         def resolve(content:)
-            Tweet.create(
+            Tweet.create!(
                 content: content,
                 user_id: context[:current_user].id
             )

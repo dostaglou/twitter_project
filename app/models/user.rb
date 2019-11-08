@@ -24,7 +24,9 @@ class User < ApplicationRecord
     end
 
     def follow(user_id)
-      active_follow.create(following_id: user_id)
+      if User.find(user_id) && active_follow.find_by(following_id: user_id) == nil
+        active_follow.create!(following_id: user_id)
+      end
     end
   
     def unfollow(user_id)
