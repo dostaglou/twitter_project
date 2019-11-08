@@ -1,9 +1,8 @@
 module Resolvers
     class TweetStats < Resolvers::Base
         argument :user_id, ID, required: false
-
+        type GraphQL::Types::JSON, null: false
         def resolve(user_id: nil)
-        
         case 
         when user_id == nil
             sql = <<-SQL 
@@ -17,11 +16,10 @@ module Resolvers
             group by date(created_at) limit 7
             SQL
         end
-        
-        records_array = ActiveRecord::Base.connection.execute(sql)
-        # records_array.map! { |hsh| Tweet.find(hsh["id"]) }
-
-
+        parameters = ActiveRecord::Base.connection.execute(sql)
+        hsh = {}
+        parameters&.each{ |el| hsh[el["date(created_at)"]] = el["count(*)"] }
+        hsh
         end
     end
 end

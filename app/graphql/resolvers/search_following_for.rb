@@ -1,5 +1,5 @@
 module Resolvers
-    class SearchFollowing < Resolvers::Base
+    class SearchFollowingFor < Resolvers::Base
         
         argument :limit, Integer, required: false
         argument :self_only, Boolean, required: false, default_value: false
