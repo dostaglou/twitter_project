@@ -2,8 +2,8 @@ module Resolvers
     class SearchFollowingFor < Resolvers::Base
         
         argument :limit, Integer, required: false
-        argument :self_only, , required: false, default_value: false
-        argument :others_only, Boolean, required: false, default_value: false
+        argument :self_only, Boolean, required: true, default_value: false
+        argument :others_only, Boolean, required: true, default_value: false
         argument :keyword, String, required: true
         type [Types::TweetType], null: false
 
