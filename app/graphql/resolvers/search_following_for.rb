@@ -35,17 +35,9 @@ module Resolvers
                 SQL
             else
                 # all
-                sql = <<-SQL
-                    select * from tweets
-                    where user_id in (Select following_id from follows where follower_id = #{cu.id})
-                    and content like '%#{keyword}%'
-                    order by created_at DESC
-                    limit #{limit}
-                SQL
+                return Tweet.where(user_id: [cu.following.select(:id)]).where("content like ?", "%#{keyword}%").limit(limit)
             end
-            
-            records_array = ActiveRecord::Base.connection.execute(sql)
-            records_array.map! { |hsh| Tweet.find(hsh["id"]) }
+
         end
     end
 end

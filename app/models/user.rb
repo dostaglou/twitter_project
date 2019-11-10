@@ -16,15 +16,10 @@ class User < ApplicationRecord
 
     def first_tweet
       Tweet.create( content: "I just joined Dwitter!", user_id: self.id )
-      first_follow
-    end
-
-    def first_follow
-      self.follow(self.id)
     end
 
     def follow(user_id)
-      if User.find(user_id) && active_follow.find_by(following_id: user_id) == nil
+      if self.id != user_id && active_follow.find_by(following_id: user_id) == nil
         active_follow.create!(following_id: user_id)
       end
     end
