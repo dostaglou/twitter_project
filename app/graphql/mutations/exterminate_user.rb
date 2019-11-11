@@ -1,9 +1,10 @@
 module Mutations
     class ExterminateUser < BaseMutation
-        type Types::UserType
+        type String
         def resolve
-            context[:current_user]&.destroy
-            context[:current_user]
+            self.me?
+            me&.destroy
+            "YOU NO LONGER EXIST IN OUR DATABASE! I HOPE YOU ARE PROUD OF YOURSELF!"
         end
     end
 end
