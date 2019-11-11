@@ -15,27 +15,16 @@ module Resolvers
             return GraphQL::ExecutionError.new("You may not set both SELF and OTHERs true at the same time") if self_only == true && others_only == true
             case
             when self_only ==  true
-                # mine
-                sql = <<-SQL
-                select * from tweets
-                where user_id is #{cu.id}
-                and content like '%#{keyword}%'
-                order by created_at DESC
-                limit #{limit}
-                SQL
+                # self only
+                return Tweet.where(user_id: cu.id).where("content like ? ", "%#{keyword}%").limit(limit)
             when others_only == true
                 # theirs
-                sql = <<-SQL
-                select * from tweets
-                where user_id in (Select following_id from follows where follower_id = #{cu.id})
-                and not user_id = #{ cu.id }
-                and content like '%#{keyword}%'
-                order by created_at DESC
-                limit #{limit} 
-                SQL
+                return Tweet.where(user_id: [cu.following.select(:id)]).where("content like ? ", "%#{keyword}%").limit(limit)
             else
                 # all
-                return Tweet.where(user_id: [cu.following.select(:id)]).where("content like ?", "%#{keyword}%").limit(limit)
+                value = cu.following.select(:id)
+                # byebug
+                return Tweet.where(user_id: [ cu.id, cu.following.select(:id)].flatten).where("content like ?", "%#{keyword}%").limit(limit)
             end
 
         end
