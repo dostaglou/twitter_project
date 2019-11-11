@@ -2,8 +2,8 @@ module Types
     class Pagination < BaseInputObject
         description "Universal Pagination Arguments"
         graphql_name "UPA"
-        argument :offset, Integer, required: false
-        argument :limit, Integer, required: false
+        argument :offset, Integer, required: false, default_value: 0
+        argument :limit, Integer, required: false, default_value: 10
 
         def prepare 
             return GraphQL::ExecutionError.new("limit must be between 1 and 50") unless (1..50).include?(limit)
