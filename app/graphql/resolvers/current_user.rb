@@ -1,9 +1,9 @@
 module Resolvers
-    class CurrentUser < Resolvers::Base
+    class CurrentUser < Resolvers::CurrentUserCheck
         type Types::UserType, null: false
         def resolve
-            return GraphQL::ExecutionError.new("Must be signed in to access this feature") unless context[:current_user]
-            context[:current_user]
+            self.cuc
+            me
         end
     end
 end
