@@ -4,8 +4,6 @@ module Types
         field :user, Types::UserType, null: true
         field :content, String, null: true
         field :likes, Integer, null: true
-        def likes
-            object.likes.count
-        end
+        field :popularity, Integer, null: false
     end
 end
