@@ -8,5 +8,7 @@ module Types
     field :create_follow, mutation: Mutations::CreateFollow
     field :unfollow, mutation: Mutations::Unfollow
     field :exterminate_user, mutation: Mutations::ExterminateUser
+    field :add_like, mutation: Mutations::AddLike
+    field :unlike, mutation: Mutations::Unlike
   end
 end

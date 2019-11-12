@@ -2,7 +2,7 @@ class User < ApplicationRecord
     has_secure_password
 
     has_many :tweets, dependent: :destroy
-    has_many :likes, through: :tweets
+    has_many :likes
     
     validates :username, presence: true, uniqueness: true
     validates :email, presence: true, uniqueness: true

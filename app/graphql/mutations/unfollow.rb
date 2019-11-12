@@ -2,6 +2,7 @@ module Mutations
     class Unfollow < BaseMutation
         argument :user_id, ID, required: true
         type String
+        
         def resolve (user_id:)
             me.unfollow(user_id)
             "You no longer follow that user"
