@@ -10,7 +10,7 @@ module Types
         field :following_count, Integer, null: true
         field :tweet_count, Integer, null: true
         field :popularity, Integer, null: true
-
+        
         def followers_count
             object.followers.count
         end

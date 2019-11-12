@@ -1,6 +1,6 @@
 class Tweet < ApplicationRecord
   belongs_to :user
-  # has_ancestors
+  has_ancestry
   
   has_many :likes
   
