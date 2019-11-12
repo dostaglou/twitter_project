@@ -2,7 +2,7 @@ class Tweet < ApplicationRecord
   belongs_to :user
   has_ancestry
   
-  has_many :likes
+  has_many :likes, dependent: :destroy
   
   after_create :notify_user
   

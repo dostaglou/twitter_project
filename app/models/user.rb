@@ -2,7 +2,7 @@ class User < ApplicationRecord
     has_secure_password
 
     has_many :tweets, dependent: :destroy
-    has_many :likes
+    has_many :likes, dependent: :destroy
     
     validates :username, presence: true, uniqueness: true
     validates :email, presence: true, uniqueness: true
@@ -15,9 +15,9 @@ class User < ApplicationRecord
   
     after_create :first_tweet
 
-    def first_tweet
-      Tweet.create( content: "I just joined Dwitter!", user_id: self.id )
-    end
+    # def first_tweet
+    #   Tweet.create( content: "I just joined Dwitter!", user_id: self.id )
+    # end
 
     def follow(user_id)
       if self.id != user_id && active_follow.find_by(following_id: user_id) == nil
