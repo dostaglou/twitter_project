@@ -8,13 +8,8 @@ module Types
         field :following, [Types::UserType], null: true
         field :followers, [Types::UserType], null: true
         field :following_count, Integer, null: true
-        field :followers_count, Integer, null: true
         field :tweet_count, Integer, null: true
-
-
-        def following_count
-            object.following.count
-        end
+        field :popularity, Integer, null: true
 
         def followers_count
             object.followers.count
